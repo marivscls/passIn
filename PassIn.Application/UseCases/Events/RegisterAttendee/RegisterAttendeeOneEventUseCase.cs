@@ -10,15 +10,15 @@ namespace PassIn.Application.UseCases.Events.RegisterAttendee
 {
     public class RegisterAttendeeOneEventUseCase
     {
-        private readonly PassInDbContent _dbContext;
+        private readonly PassInDbContext _dbContext;
 
         public RegisterAttendeeOneEventUseCase()
         {
-             _dbContext = new PassInDbContent();
+            _dbContext = new PassInDbContext();
 
         }
 
-        public ResponseRegisteredJson Execute( Guid eventId, RequestRegisterEventJson request)
+        public ResponseRegisteredJson Execute(Guid eventId, RequestRegisterEventJson request)
         {
 
             Validate(eventId, request);
@@ -53,7 +53,7 @@ namespace PassIn.Application.UseCases.Events.RegisterAttendee
             }
 
 
-            if(EmailIsValid(request.Email) == false)
+            if (EmailIsValid(request.Email) == false)
             {
                 throw new ErrorOnValidationException("The e-mail is invalid");
 
@@ -61,14 +61,14 @@ namespace PassIn.Application.UseCases.Events.RegisterAttendee
 
             var attendeesAlreadyRegistered = _dbContext.Attendees.Any(attendee => attendee.Email.Equals(request.Email) && attendee.Event_Id == eventId);
 
-            if(attendeesAlreadyRegistered )
+            if (attendeesAlreadyRegistered)
             {
                 throw new ConflictException("You can not register twice on the same event.");
             }
 
-            var attendeesForEvent =  _dbContext.Attendees.Count(Attendees => Attendees.Event_Id == eventId);
+            var attendeesForEvent = _dbContext.Attendees.Count(Attendees => Attendees.Event_Id == eventId);
 
-            if(attendeesForEvent == eventEntity.Maximum_Attendees)
+            if (attendeesForEvent == eventEntity.Maximum_Attendees)
             {
                 throw new ErrorOnValidationException("There is no room for this event.");
             }
@@ -89,7 +89,7 @@ namespace PassIn.Application.UseCases.Events.RegisterAttendee
             }
 
 
-               
+
         }
     }
 }

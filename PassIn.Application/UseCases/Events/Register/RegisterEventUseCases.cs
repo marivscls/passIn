@@ -11,7 +11,7 @@ namespace PassIn.Application.UseCases.Events.Register
         {
             Validate(request);
 
-            var dbContext = new PassInDbContent();
+            var dbContext = new PassInDbContext();
             var entity = new Infrastructure.Entities.Event
             {
                 Title = request.Title,

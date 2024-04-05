@@ -9,6 +9,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
+
+builder.Services.AddRouting(opttions => opttions.LowercaseUrls = true);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

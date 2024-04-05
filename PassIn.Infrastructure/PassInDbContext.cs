@@ -3,10 +3,12 @@ using PassIn.Infrastructure.Entities;
 
 namespace PassIn.Infrastructure
 {
-    public class PassInDbContent : DbContext
+    public class PassInDbContext : DbContext
     {
         public DbSet<Event> Events { get; set; }
         public DbSet<Attendees> Attendees { get; set; }
+
+        public DbSet<CheckIn> CheckIns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -14,3 +16,4 @@ namespace PassIn.Infrastructure
         }
     }
 }
+
